@@ -1,6 +1,6 @@
 # Spring Boot MVC Sample
 
-Spring Boot with RESTFul Api and Client UI
+Spring Boot with RESTFul API and Client UI
 
 
 ## Requirements
