@@ -1,0 +1,55 @@
+<!doctype html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <title>Demo</title>
+    <meta name="description" content=""/>
+    <meta name="viewport" content="width=device-width"/>
+    <base href="/"/>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+    <script type="text/javascript" th:src="@{/webjars/jquery/jquery.min.js}"></script>
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+</head>
+<body ng-app="app">
+    <div class="container" ng-controller="home as home">
+        <div class="page-header">
+            <h1>Sample Page by AngularJS</h1>
+        </div>
+        <div class="alert alert-danger" role="alert" ng-show="home.errorMessage">
+            <span class="glyphicon glyphicon-exclamation-sign" aria-hidden="true"></span>
+            <span class="sr-only">Error:</span>
+            {{home.errorMessage}}
+        </div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th width="20%">ID</th>
+                    <th width="80%">Name</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="user in home.users">
+                    <td>{{user.id}}</td>
+                    <td>{{user.name}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <script type="text/javascript" th:src="@{/webjars/angularjs/angular.min.js}"></script>
+    <script type="text/javascript">
+        angular.module("app", []).controller("home", function($http) {
+            var self = this;
+            self.errorMessage = null;
+
+            $http.get("/demo/api/1.0/users").success(function(data) {
+                self.errorMessage = null;
+                self.users = data;
+            }).error(function() {
+                self.errorMessage = "Failed to contact server.";
+            });
+        });
+    </script>
+</body>
+</html>

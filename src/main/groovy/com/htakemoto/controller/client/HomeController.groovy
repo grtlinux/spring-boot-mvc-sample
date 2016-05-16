@@ -17,4 +17,9 @@ class HomeController {
         model.addAttribute("users", userResource.getUsers())
         return "greeting"
     }
+
+    @RequestMapping("/angular")
+    String angular(Model model) {
+        return "angular"
+    }
 }
